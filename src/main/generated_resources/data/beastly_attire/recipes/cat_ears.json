@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#Y#",
+    "X#X"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:string"
+    },
+    "X": {
+      "tag": "forge:leather"
+    },
+    "Y": {
+      "tag": "minecraft:fishes"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:cat_ears"
+  }
+}

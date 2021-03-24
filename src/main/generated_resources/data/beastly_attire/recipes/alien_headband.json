@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "X X",
+    " Y "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:slimeballs"
+    },
+    "X": {
+      "tag": "forge:rods/wooden"
+    },
+    "Y": {
+      "tag": "forge:string"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:alien_headband"
+  }
+}

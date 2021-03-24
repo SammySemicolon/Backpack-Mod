@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#Y#",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/netherite"
+    },
+    "X": {
+      "item": "minecraft:basalt"
+    },
+    "Y": {
+      "tag": "forge:rods/blaze"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:blaze_belt"
+  }
+}

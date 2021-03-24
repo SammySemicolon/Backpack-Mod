@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XYX",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "X": {
+      "tag": "forge:string"
+    },
+    "Y": {
+      "item": "minecraft:milk_bucket"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:mask"
+  }
+}

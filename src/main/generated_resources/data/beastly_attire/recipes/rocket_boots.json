@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#Y#",
+    "ZXZ"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:leather"
+    },
+    "X": {
+      "item": "minecraft:leather_boots"
+    },
+    "Y": {
+      "tag": "forge:nuggets/gold"
+    },
+    "Z": {
+      "item": "minecraft:firework_rocket"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:rocket_boots"
+  }
+}

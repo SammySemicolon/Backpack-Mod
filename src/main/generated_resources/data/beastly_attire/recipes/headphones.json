@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Y#Y",
+    "X X",
+    "Y Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:jukebox"
+    },
+    "X": {
+      "tag": "forge:dusts/redstone"
+    },
+    "Y": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:headphones"
+  }
+}

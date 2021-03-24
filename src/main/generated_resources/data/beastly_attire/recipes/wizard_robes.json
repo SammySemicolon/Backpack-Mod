@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "XZX",
+    "Y Y"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dyes/red"
+    },
+    "X": {
+      "tag": "forge:ingots/gold"
+    },
+    "Y": {
+      "tag": "forge:gems/lapis"
+    },
+    "Z": {
+      "item": "minecraft:golden_chestplate"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:wizard_robes"
+  }
+}

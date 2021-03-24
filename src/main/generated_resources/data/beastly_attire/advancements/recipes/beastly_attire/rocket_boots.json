@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beastly_attire:rocket_boots"
+    ]
+  },
+  "criteria": {
+    "has_fireworks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:firework_rocket"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beastly_attire:rocket_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fireworks",
+      "has_the_recipe"
+    ]
+  ]
+}

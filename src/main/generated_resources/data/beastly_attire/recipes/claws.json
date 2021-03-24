@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "XXX",
+    "YYY"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:leather"
+    },
+    "X": {
+      "tag": "forge:ingots/iron"
+    },
+    "Y": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:claws"
+  }
+}

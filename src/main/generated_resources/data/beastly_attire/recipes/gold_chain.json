@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "X#X",
+    " X "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:chain"
+    },
+    "X": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:gold_chain"
+  }
+}

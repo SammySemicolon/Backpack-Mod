@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WZW",
+    "Y#Y",
+    "WXW"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ender_pearls"
+    },
+    "X": {
+      "tag": "forge:gems/diamond"
+    },
+    "Y": {
+      "tag": "forge:leather"
+    },
+    "Z": {
+      "item": "minecraft:gold_ingot"
+    },
+    "W": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:pacc"
+  }
+}

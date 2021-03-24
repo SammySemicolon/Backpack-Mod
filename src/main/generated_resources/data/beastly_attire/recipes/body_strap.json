@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " YX",
+    "Y#Y",
+    "XY "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:leather"
+    },
+    "X": {
+      "tag": "forge:chests/wooden"
+    },
+    "Y": {
+      "item": "minecraft:rabbit_hide"
+    }
+  },
+  "result": {
+    "item": "beastly_attire:body_strap"
+  }
+}

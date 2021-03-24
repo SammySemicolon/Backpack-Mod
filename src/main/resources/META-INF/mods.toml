@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[33,)"
+license="All rights reserved"
+[[mods]]
+modId="backpack_mod"
+version="${file.jarVersion}"
+displayName="Backpack Mod"
+credits='''The Minecraft Modding Discord and everyone there.
+Its an amazing place full of a ton of amazing people, this mod wouldnt be possible without them.'''
+authors="Sammy"
+description='''
+Description goes here
+'''
+[[dependencies.mod_name]]
+    modId="forge"
+    mandatory=true
+    versionRange="[34.0.5,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mod_name]]
+    modId="curios"
+    mandatory=true
+    versionRange="[1.16.4,1.17)"
+    ordering="AFTER"
+    side="BOTH"
