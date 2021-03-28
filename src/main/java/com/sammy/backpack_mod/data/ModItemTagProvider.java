@@ -73,6 +73,6 @@ public class ModItemTagProvider extends ItemTagsProvider
         //        this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
         //        this.copy(BlockTags.GOLD_ORES, ItemTags.GOLD_ORES);
         //        this.copy(BlockTags.SOUL_FIRE_BASE_BLOCKS, ItemTags.SOUL_FIRE_BASE_BLOCKS);
-        getOrCreateBuilder(BACKPACK_BLACKLISTED).add(Items.SHULKER_BOX, BackpackModItems.BACKPACK.get(), BackpackModItems.NETHERITE_BACKPACK.get());
+//        getOrCreateBuilder(BACKPACK_BLACKLISTED).add(Items.SHULKER_BOX, BackpackModItems.BACKPACK.get(), BackpackModItems.NETHERITE_BACKPACK.get());
     }
 }

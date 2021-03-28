@@ -11,6 +11,6 @@ public class GoldenBackpackScreen extends AbstractBackpackScreen
 {
     public GoldenBackpackScreen(AbstractBackpackContainer container, PlayerInventory player, ITextComponent title)
     {
-        super(container, player, title, BackpackModHelper.prefix("textures/gui/backpack_gold.png"));
+        super(container, player, title, "textures/gui/backpack_gold");
     }
 }

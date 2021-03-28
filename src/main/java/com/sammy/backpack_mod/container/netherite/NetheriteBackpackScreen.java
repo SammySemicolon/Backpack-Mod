@@ -10,7 +10,7 @@ public class NetheriteBackpackScreen extends AbstractBackpackScreen
 {
     public NetheriteBackpackScreen(AbstractBackpackContainer container, PlayerInventory player, ITextComponent title)
     {
-        super(container, player, title, BackpackModHelper.prefix("textures/gui/backpack_netherite.png"));
+        super(container, player, title, "textures/gui/backpack_netherite");
         ySize = 222;
     }
 }

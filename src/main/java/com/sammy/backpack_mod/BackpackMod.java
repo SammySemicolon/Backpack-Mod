@@ -27,7 +27,6 @@ public class BackpackMod
         CONTAINERS.register(modBus);
         ITEMS.register(modBus);
         TILE_ENTITIES.register(modBus);
-        ItemTags.init();
         modBus.addListener(this::gatherData);
     }
 

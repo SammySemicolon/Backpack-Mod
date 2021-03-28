@@ -9,31 +9,33 @@
 package com.sammy.backpack_mod.container;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.sammy.backpack_mod.BackpackModHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.IDyeableArmorItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
+
+import static net.minecraft.util.ColorHelper.PackedColor.packColor;
 
 public abstract class AbstractBackpackScreen extends ContainerScreen<AbstractBackpackContainer>
 {
 	public final ResourceLocation texture;
-	public AbstractBackpackScreen(AbstractBackpackContainer container, PlayerInventory player, ITextComponent title, ResourceLocation texture)
+	public final ResourceLocation overlayTexture;
+	public AbstractBackpackScreen(AbstractBackpackContainer container, PlayerInventory player, ITextComponent title, String texture)
 	{
 		super(container, player, title);
 		this.passEvents = true;
-		this.texture = texture;
+		this.texture = BackpackModHelper.prefix(texture + ".png");
+		this.overlayTexture = BackpackModHelper.prefix(texture + "_overlay.png");
 	}
-
-	@Override
-	public void init()
-	{
-		super.init();
-	}
-
 
 	@Override
 	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
@@ -65,7 +67,21 @@ public abstract class AbstractBackpackScreen extends ContainerScreen<AbstractBac
 	{
 		if (this.minecraft != null && this.minecraft.player != null)
 		{
-			this.font.func_243248_b(matrixStack, this.title, 97.0F, 6.0F, 4210752);
+			ItemStack backpack = container.backpack;
+			IDyeableArmorItem coloredBackpack = (IDyeableArmorItem) backpack.getItem();
+			Color color = new Color(coloredBackpack.getColor(backpack));
+			Color insideColor = color.darker().darker().darker();
+			Color outlineColor = color.darker().darker();
+			String text = title.getString();
+			float x = 89 - font.getStringWidth(text) / 2f;
+			float y = 6;
+			
+			font.drawString(matrixStack, text, x, y - 1, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));
+			font.drawString(matrixStack, text, x - 1, y, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));
+			font.drawString(matrixStack, text, x + 1, y, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));
+			font.drawString(matrixStack, text, x, y + 1, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));
+
+			font.drawString(matrixStack, text, x, y, packColor(255,  insideColor.getRed(), insideColor.getGreen(), insideColor.getBlue()));
 		}
 	}
 
@@ -73,6 +89,13 @@ public abstract class AbstractBackpackScreen extends ContainerScreen<AbstractBac
 	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y)
 	{
 		this.minecraft.getTextureManager().bindTexture(texture);
+		blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
+
+		ItemStack backpack = container.backpack;
+		IDyeableArmorItem coloredBackpack = (IDyeableArmorItem) backpack.getItem();
+		this.minecraft.getTextureManager().bindTexture(overlayTexture);
+		Color color = new Color(coloredBackpack.getColor(backpack));
+		RenderSystem.color3f(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f);
 		blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 }

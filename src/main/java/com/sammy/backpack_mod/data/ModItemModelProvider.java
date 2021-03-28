@@ -1,5 +1,6 @@
 package com.sammy.backpack_mod.data;
 
+import com.sammy.backpack_mod.init.BackpackModItems;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.*;
@@ -27,25 +28,27 @@ public class ModItemModelProvider extends net.minecraftforge.client.model.genera
     @Override
     protected void registerModels()
     {
-        Set<RegistryObject<Item>> items = new HashSet<>(ITEMS.getEntries());
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof WallBlock).forEach(this::wallBlockItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof FenceBlock).forEach(this::fenceBlockItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoorBlock).forEach(this::generatedItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof TrapDoorBlock).forEach(this::trapdoorBlockItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof PressurePlateBlock).forEach(this::pressurePlateBlockItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof AbstractButtonBlock).forEach(this::buttonBlockItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof BushBlock && !(((BlockItem) i.get()).getBlock() instanceof DoublePlantBlock)).forEach(this::blockGeneratedItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoublePlantBlock).forEach(this::generatedItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof LanternBlock).forEach(this::generatedItem);
-        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof TorchBlock).forEach(this::generatedItem);
-        
-        takeAll(items, i -> i.get() instanceof BlockItem).forEach(this::blockItem);
-        takeAll(items, i -> i.get() instanceof ToolItem).forEach(this::handheldItem);
-        takeAll(items, i -> i.get() instanceof SwordItem).forEach(this::handheldItem);
-        takeAll(items, i -> i.get() instanceof BowItem).forEach(this::handheldItem);
-        items.forEach(this::generatedItem);
+//        Set<RegistryObject<Item>> items = new HashSet<>(ITEMS.getEntries());
+        backpackItem(BackpackModItems.BACKPACK, "backpack_gold_overlay");
+        backpackItem(BackpackModItems.NETHERITE_BACKPACK, "backpack_netherite_overlay");
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof WallBlock).forEach(this::wallBlockItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof FenceBlock).forEach(this::fenceBlockItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoorBlock).forEach(this::generatedItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof TrapDoorBlock).forEach(this::trapdoorBlockItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof PressurePlateBlock).forEach(this::pressurePlateBlockItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof AbstractButtonBlock).forEach(this::buttonBlockItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof BushBlock && !(((BlockItem) i.get()).getBlock() instanceof DoublePlantBlock)).forEach(this::blockGeneratedItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoublePlantBlock).forEach(this::generatedItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof LanternBlock).forEach(this::generatedItem);
+//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof TorchBlock).forEach(this::generatedItem);
+//
+//        takeAll(items, i -> i.get() instanceof BlockItem).forEach(this::blockItem);
+//        takeAll(items, i -> i.get() instanceof ToolItem).forEach(this::handheldItem);
+//        takeAll(items, i -> i.get() instanceof SwordItem).forEach(this::handheldItem);
+//        takeAll(items, i -> i.get() instanceof BowItem).forEach(this::handheldItem);
+//        items.forEach(this::generatedItem);
     }
-    
+
     private static final ResourceLocation GENERATED = new ResourceLocation("item/generated");
     private static final ResourceLocation HANDHELD = new ResourceLocation("item/handheld");
     
@@ -54,7 +57,12 @@ public class ModItemModelProvider extends net.minecraftforge.client.model.genera
         String name = Registry.ITEM.getKey(i.get()).getPath();
         withExistingParent(name, HANDHELD).texture("layer0", prefix("item/" + name));
     }
-    
+
+    private void backpackItem(RegistryObject<Item> i, String overlay)
+    {
+        String name = Registry.ITEM.getKey(i.get()).getPath();
+        withExistingParent(name, GENERATED).texture("layer0", prefix("item/backpack_base")).texture("layer1", prefix("item/" + overlay));
+    }
     private void generatedItem(RegistryObject<Item> i)
     {
         String name = Registry.ITEM.getKey(i.get()).getPath();
