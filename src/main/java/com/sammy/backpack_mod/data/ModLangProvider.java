@@ -1,7 +1,6 @@
 package com.sammy.backpack_mod.data;
 
 import com.sammy.backpack_mod.BackpackModHelper;
-import com.sammy.backpack_mod.init.BackpackModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.data.DataGenerator;
@@ -27,7 +26,7 @@ public class ModLangProvider extends LanguageProvider
     protected void addTranslations()
     {
         Set<RegistryObject<Block>> blocks = new HashSet<>(BLOCKS.getEntries());
-        Set<RegistryObject<Item>> items = new HashSet<>(BackpackModItems.ITEMS.getEntries());
+        Set<RegistryObject<Item>> items = new HashSet<>(ITEMS.getEntries());
         BackpackModHelper.takeAll(items, i -> i.get() instanceof BlockItem);
         BackpackModHelper.takeAll(blocks, i -> i.get() instanceof WallTorchBlock);
         blocks.forEach(b -> {

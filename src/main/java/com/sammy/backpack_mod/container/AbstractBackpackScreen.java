@@ -75,7 +75,7 @@ public abstract class AbstractBackpackScreen extends ContainerScreen<AbstractBac
 			String text = title.getString();
 			float x = 89 - font.getStringWidth(text) / 2f;
 			float y = 6;
-			
+
 			font.drawString(matrixStack, text, x, y - 1, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));
 			font.drawString(matrixStack, text, x - 1, y, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));
 			font.drawString(matrixStack, text, x + 1, y, packColor(96, outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue()));

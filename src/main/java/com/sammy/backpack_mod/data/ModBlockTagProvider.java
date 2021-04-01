@@ -18,7 +18,7 @@ public class ModBlockTagProvider extends BlockTagsProvider
     {
         super(generatorIn);
     }
-    
+
     @Override
     protected void registerTags()
     {
@@ -44,13 +44,13 @@ public class ModBlockTagProvider extends BlockTagsProvider
         //        getOrCreateBuilder(WOODEN_TRAPDOORS).add();
         //        getOrCreateBuilder(WOODEN_PRESSURE_PLATES).add();
     }
-    
+
     @Override
     public String getName()
     {
         return "Block Tags";
     }
-    
+
     @Nonnull
     private Block[] getModBlocks(Predicate<Block> predicate)
     {

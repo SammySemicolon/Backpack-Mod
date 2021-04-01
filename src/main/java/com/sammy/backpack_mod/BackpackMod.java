@@ -1,7 +1,6 @@
 package com.sammy.backpack_mod;
 
 import com.sammy.backpack_mod.data.*;
-import com.sammy.backpack_mod.init.ItemTags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -11,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.sammy.backpack_mod.BackpackMod.MODID;
-import static com.sammy.backpack_mod.init.BackpackModItems.ITEMS;
+import static com.sammy.backpack_mod.init.Registries.ITEMS;
 import static com.sammy.backpack_mod.init.Registries.*;
 
 @Mod(MODID)
@@ -38,7 +37,7 @@ public class BackpackMod
         evt.getGenerator().addProvider(new ModLangProvider(evt.getGenerator()));
         evt.getGenerator().addProvider(provider);
         evt.getGenerator().addProvider(new ModLootTableProvider(evt.getGenerator()));
-        evt.getGenerator().addProvider(new ModItemTagProvider(evt.getGenerator(), provider));
+        evt.getGenerator().addProvider(new ModItemTagProvider(evt.getGenerator(), provider, evt.getExistingFileHelper()));
         evt.getGenerator().addProvider(new ModRecipeProvider(evt.getGenerator()));
     }
 }

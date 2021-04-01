@@ -2,15 +2,15 @@ package com.sammy.backpack_mod.common.items;
 
 import com.sammy.backpack_mod.BackpackModHelper;
 import com.sammy.backpack_mod.container.gold.GoldenBackpackContainer;
-import com.sammy.backpack_mod.container.netherite.NetheriteBackpackContainer;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.IDyeableArmorItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -19,22 +19,27 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-public class NetheriteBackpackItem extends AbstractBackpackItem
+public class AbstractBackpackItem extends BlockItem implements IDyeableArmorItem
 {
-    public NetheriteBackpackItem(Block block, Properties properties)
+    public AbstractBackpackItem(Block blockIn, Properties builder)
     {
-        super(block, properties);
+        super(blockIn, builder);
     }
 
     @Override
+    protected boolean placeBlock(BlockItemUseContext context, BlockState state)
+    {
+        return super.placeBlock(context, state);
+    }
+
+    @Nonnull
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand)
+    {
+        openContainer(world, player, player.getHeldItem(hand));
+        return ActionResult.resultSuccess(player.getHeldItem(hand));
+    }
     public void openContainer(World world, PlayerEntity player, ItemStack backpack)
     {
-
-        if (BackpackModHelper.areWeOnServer(world))
-        {
-            INamedContainerProvider container =
-                    new SimpleNamedContainerProvider((w, p, pl) -> new NetheriteBackpackContainer(w, p, backpack), backpack.getDisplayName());
-            NetworkHooks.openGui((ServerPlayerEntity) player, container, b -> b.writeItemStack(backpack));
-        }
     }
 }

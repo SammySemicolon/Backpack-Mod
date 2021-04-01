@@ -1,6 +1,7 @@
 package com.sammy.backpack_mod.data;
 
-import com.sammy.backpack_mod.init.BackpackModItems;
+import com.sammy.backpack_mod.BackpackMod;
+import com.sammy.backpack_mod.init.Registries;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
@@ -8,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import static com.sammy.backpack_mod.BackpackModHelper.prefix;
 import static com.sammy.backpack_mod.init.ItemTags.BACKPACK_BLACKLISTED;
@@ -15,20 +17,15 @@ import static com.sammy.backpack_mod.init.ItemTags.BACKPACK_BLACKLISTED;
 
 public class ModItemTagProvider extends ItemTagsProvider
 {
-    public ModItemTagProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider)
+    public ModItemTagProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper)
     {
-        super(dataGenerator, blockTagProvider);
+        super(dataGenerator, blockTagProvider, BackpackMod.MODID, existingFileHelper);
     }
 
     @Override
     public String getName()
     {
         return "Item Tags";
-    }
-
-    public static ITag.INamedTag<Item> makeWrapperTag(String id)
-    {
-        return ItemTags.createOptional(prefix(id));
     }
 
     @Override
@@ -73,6 +70,6 @@ public class ModItemTagProvider extends ItemTagsProvider
         //        this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
         //        this.copy(BlockTags.GOLD_ORES, ItemTags.GOLD_ORES);
         //        this.copy(BlockTags.SOUL_FIRE_BASE_BLOCKS, ItemTags.SOUL_FIRE_BASE_BLOCKS);
-//        getOrCreateBuilder(BACKPACK_BLACKLISTED).add(Items.SHULKER_BOX, BackpackModItems.BACKPACK.get(), BackpackModItems.NETHERITE_BACKPACK.get());
+        getOrCreateBuilder(BACKPACK_BLACKLISTED).add(Items.SHULKER_BOX, Registries.BACKPACK.get(), Registries.NETHERITE_BACKPACK.get());
     }
 }

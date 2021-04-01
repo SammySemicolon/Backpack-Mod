@@ -15,8 +15,7 @@ public class NetheriteBackpackContainer extends AbstractBackpackContainer
     }
     public static NetheriteBackpackContainer makeContainer(int windowId, PlayerInventory inv, PacketBuffer buf)
     {
-        Hand hand = buf.readBoolean() ? Hand.MAIN_HAND : Hand.OFF_HAND;
-        return new NetheriteBackpackContainer(windowId, inv, inv.player.getHeldItem(hand));
+        return new NetheriteBackpackContainer(windowId, inv, buf.readItemStack());
     }
 
     @Override

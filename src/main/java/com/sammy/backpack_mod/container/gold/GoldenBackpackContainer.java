@@ -15,7 +15,6 @@ public class GoldenBackpackContainer extends AbstractBackpackContainer
     }
     public static GoldenBackpackContainer makeContainer(int windowId, PlayerInventory inv, PacketBuffer buf)
     {
-        Hand hand = buf.readBoolean() ? Hand.MAIN_HAND : Hand.OFF_HAND;
-        return new GoldenBackpackContainer(windowId, inv, inv.player.getHeldItem(hand));
+        return new GoldenBackpackContainer(windowId, inv, buf.readItemStack());
     }
 }

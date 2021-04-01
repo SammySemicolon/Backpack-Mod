@@ -3,10 +3,12 @@ package com.sammy.backpack_mod.common.items;
 import com.sammy.backpack_mod.BackpackModHelper;
 import com.sammy.backpack_mod.container.AbstractBackpackContainer;
 import com.sammy.backpack_mod.container.gold.GoldenBackpackContainer;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,24 +19,22 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-public class GoldenBackpackItem extends Item implements IDyeableArmorItem
+public class GoldenBackpackItem extends AbstractBackpackItem
 {
-    public GoldenBackpackItem(Properties properties)
+    public GoldenBackpackItem(Block block, Properties properties)
     {
-        super(properties);
+        super(block, properties);
     }
 
-    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand)
+    public void openContainer(World world, PlayerEntity player, ItemStack backpack)
     {
+
         if (BackpackModHelper.areWeOnServer(world))
         {
-            ItemStack stack = player.getHeldItem(hand);
             INamedContainerProvider container =
-                    new SimpleNamedContainerProvider((w, p, pl) -> new GoldenBackpackContainer(w, p, stack), stack.getDisplayName());
-            NetworkHooks.openGui((ServerPlayerEntity) player, container, b -> b.writeBoolean(hand == Hand.MAIN_HAND));
+                    new SimpleNamedContainerProvider((w, p, pl) -> new GoldenBackpackContainer(w, p, backpack), backpack.getDisplayName());
+            NetworkHooks.openGui((ServerPlayerEntity) player, container, b -> b.writeItemStack(backpack));
         }
-        return ActionResult.resultSuccess(player.getHeldItem(hand));
     }
 }

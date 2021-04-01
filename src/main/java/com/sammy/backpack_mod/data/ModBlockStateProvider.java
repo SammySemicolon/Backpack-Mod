@@ -1,6 +1,8 @@
 package com.sammy.backpack_mod.data;
 
 import com.sammy.backpack_mod.BackpackMod;
+import com.sammy.backpack_mod.common.blocks.BackpackBlock;
+import com.sammy.backpack_mod.common.items.AbstractBackpackItem;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.AttachFace;
@@ -43,7 +45,8 @@ public class ModBlockStateProvider extends net.minecraftforge.client.model.gener
     protected void registerStatesAndModels()
     {
         Set<RegistryObject<Block>> blocks = new HashSet<>(BLOCKS.getEntries());
-    
+
+        takeAll(blocks, b -> b.get() instanceof BackpackBlock).forEach(this::backpackBlock);
         takeAll(blocks, b -> b.get() instanceof GrassBlock).forEach(this::grassBlock);
         takeAll(blocks, b -> b.get() instanceof StairsBlock).forEach(this::stairsBlock);
         takeAll(blocks, b -> b.get() instanceof RotatedPillarBlock).forEach(this::logBlock);
@@ -65,7 +68,22 @@ public class ModBlockStateProvider extends net.minecraftforge.client.model.gener
         slabs.forEach(this::slabBlock);
         
     }
-    
+
+    public void backpackBlock(RegistryObject<Block> blockRegistryObject)
+    {
+        String name = Registry.BLOCK.getKey(blockRegistryObject.get()).getPath();
+        ModelFile backpack = models().withExistingParent(name, prefix("block/backpack")).texture("1", "block/" +name);
+
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.NORTH)
+                .modelForState().modelFile(backpack).addModel()
+                .partialState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.WEST)
+                .modelForState().modelFile(backpack).rotationY(270).addModel()
+                .partialState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.SOUTH)
+                .modelForState().modelFile(backpack).rotationY(180).addModel()
+                .partialState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.EAST)
+                .modelForState().modelFile(backpack).rotationY(90).addModel();
+    }
     public void basicBlock(RegistryObject<Block> blockRegistryObject)
     {
         simpleBlock(blockRegistryObject.get());

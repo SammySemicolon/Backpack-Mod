@@ -1,6 +1,8 @@
 package com.sammy.backpack_mod.container;
 
+import com.sammy.backpack_mod.common.items.AbstractBackpackItem;
 import com.sammy.backpack_mod.common.items.NetheriteBackpackItem;
+import com.sammy.backpack_mod.init.ItemTags;
 import com.sammy.backpack_mod.init.Registries;
 import com.sammy.backpack_mod.systems.inventory.ItemInventory;
 import com.sammy.backpack_mod.systems.inventory.ItemSlot;
@@ -36,7 +38,7 @@ public abstract class AbstractBackpackContainer extends Container
                     @Override
                     public boolean isItemValid(ItemStack stack)
                     {
-                        return super.isItemValid(stack);
+                        return !ItemTags.BACKPACK_BLACKLISTED.contains(stack.getItem());
                     }
                 });
             }
@@ -52,7 +54,7 @@ public abstract class AbstractBackpackContainer extends Container
 
         for (int i1 = 0; i1 < 9; ++i1)
         {
-            if (playerInv.currentItem != i1)
+            if (!ItemTags.BACKPACK_BLACKLISTED.contains(playerInv.getStackInSlot(i1).getItem()))
             {
                 this.addSlot(new Slot(playerInv, i1, 8 + i1 * 18, offset + 142));
             }
@@ -70,9 +72,7 @@ public abstract class AbstractBackpackContainer extends Container
     @Override
     public boolean canInteractWith(@Nonnull PlayerEntity player)
     {
-        ItemStack main = player.getHeldItemMainhand();
-        ItemStack off = player.getHeldItemOffhand();
-        return !main.isEmpty() && main == backpack || !off.isEmpty() && off == backpack;
+        return true;
     }
 
     @Nonnull

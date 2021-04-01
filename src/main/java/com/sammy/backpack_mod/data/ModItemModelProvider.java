@@ -1,7 +1,6 @@
 package com.sammy.backpack_mod.data;
 
-import com.sammy.backpack_mod.init.BackpackModItems;
-import net.minecraft.block.*;
+import com.sammy.backpack_mod.init.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
@@ -10,13 +9,9 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static com.sammy.backpack_mod.BackpackModHelper.prefix;
 import static com.sammy.backpack_mod.BackpackModHelper.takeAll;
 import static com.sammy.backpack_mod.BackpackMod.MODID;
-import static com.sammy.backpack_mod.init.BackpackModItems.ITEMS;
 
 public class ModItemModelProvider extends net.minecraftforge.client.model.generators.ItemModelProvider
 {
@@ -29,8 +24,8 @@ public class ModItemModelProvider extends net.minecraftforge.client.model.genera
     protected void registerModels()
     {
 //        Set<RegistryObject<Item>> items = new HashSet<>(ITEMS.getEntries());
-        backpackItem(BackpackModItems.BACKPACK, "backpack_gold_overlay");
-        backpackItem(BackpackModItems.NETHERITE_BACKPACK, "backpack_netherite_overlay");
+        backpackItem(Registries.BACKPACK, "backpack_gold_overlay");
+        backpackItem(Registries.NETHERITE_BACKPACK, "backpack_netherite_overlay");
 //        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof WallBlock).forEach(this::wallBlockItem);
 //        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof FenceBlock).forEach(this::fenceBlockItem);
 //        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoorBlock).forEach(this::generatedItem);
