@@ -43,13 +43,13 @@ public class Registries
             "netherite_backpack_container", () -> IForgeContainerType.create(
                             NetheriteBackpackContainer::makeContainer));
 
-    public static final RegistryObject<Block> GOLDEN_BACKPACK_BLOCK = BLOCKS.register("golden_backpack_block", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
-    public static final RegistryObject<Block> NETHERITE_BACKPACK_BLOCK = BLOCKS.register("netherite_backpack_block", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL)));
+    public static final RegistryObject<Block> GOLDEN_BACKPACK_BLOCK = BLOCKS.register("golden_backpack", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL).notSolid()));
+    public static final RegistryObject<Block> NETHERITE_BACKPACK_BLOCK = BLOCKS.register("netherite_backpack", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL).notSolid()));
 
     public static final RegistryObject<TileEntityType<?>> BACKPACK_TE = TILE_ENTITIES.register("abstruse_block_tile_entity", () -> TileEntityType.Builder.create((Supplier<TileEntity>) BackpackTileEntity::new, GOLDEN_BACKPACK_BLOCK.get(), NETHERITE_BACKPACK_BLOCK.get()).build(null));
 
-    public static final RegistryObject<Item> NETHERITE_BACKPACK = ITEMS.register("netherite_backpack", () -> new NetheriteBackpackItem(NETHERITE_BACKPACK_BLOCK.get(), GEAR_PROPERTIES()));
-    public static final RegistryObject<Item> BACKPACK = ITEMS.register("backpack", () -> new GoldenBackpackItem(GOLDEN_BACKPACK_BLOCK.get(), GEAR_PROPERTIES()));
+    public static final RegistryObject<Item> NETHERITE_BACKPACK = ITEMS.register("netherite_backpack", () -> new NetheriteBackpackItem(GEAR_PROPERTIES()));
+    public static final RegistryObject<Item> BACKPACK = ITEMS.register("backpack", () -> new GoldenBackpackItem(GEAR_PROPERTIES()));
 
     public static Item.Properties GEAR_PROPERTIES()
     {

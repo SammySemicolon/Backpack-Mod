@@ -1,6 +1,6 @@
 {
   "parent": "backpack_mod:block/backpack",
   "textures": {
-    "1": "backpack_mod:block/golden_backpack_block"
+    "1": "backpack_mod:block/netherite_backpack"
   }
 }

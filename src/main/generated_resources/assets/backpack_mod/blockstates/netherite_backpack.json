@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "backpack_mod:block/netherite_backpack"
+    },
+    "facing=south": {
+      "model": "backpack_mod:block/netherite_backpack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "backpack_mod:block/netherite_backpack",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "backpack_mod:block/netherite_backpack",
+      "y": 90
+    }
+  }
+}

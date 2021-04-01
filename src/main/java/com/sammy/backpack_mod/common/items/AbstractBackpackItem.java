@@ -1,44 +1,45 @@
 package com.sammy.backpack_mod.common.items;
 
-import com.sammy.backpack_mod.BackpackModHelper;
-import com.sammy.backpack_mod.container.gold.GoldenBackpackContainer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import com.sammy.backpack_mod.client.models.BackpackModel;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
+import net.minecraft.util.LazyValue;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class AbstractBackpackItem extends BlockItem implements IDyeableArmorItem
+public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem
 {
-    public AbstractBackpackItem(Block blockIn, Properties builder)
+    private LazyValue<Object> model;
+
+    public AbstractBackpackItem(Properties builder)
     {
-        super(blockIn, builder);
+        super(ArmorMaterial.LEATHER, EquipmentSlotType.CHEST, builder);
+        if (FMLEnvironment.dist == Dist.CLIENT)
+        {
+            this.model = DistExecutor.runForDist(() -> () -> new LazyValue<>(BackpackModel::new), () -> () -> null);
+        }
     }
 
     @Override
-    protected boolean placeBlock(BlockItemUseContext context, BlockState state)
+    @OnlyIn(Dist.CLIENT)
+    @SuppressWarnings("unchecked")
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A original)
     {
-        return super.placeBlock(context, state);
+        return (A) model.getValue();
     }
 
-    @Nonnull
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand)
-    {
-        openContainer(world, player, player.getHeldItem(hand));
-        return ActionResult.resultSuccess(player.getHeldItem(hand));
-    }
     public void openContainer(World world, PlayerEntity player, ItemStack backpack)
     {
     }

@@ -54,10 +54,7 @@ public abstract class AbstractBackpackContainer extends Container
 
         for (int i1 = 0; i1 < 9; ++i1)
         {
-            if (!ItemTags.BACKPACK_BLACKLISTED.contains(playerInv.getStackInSlot(i1).getItem()))
-            {
-                this.addSlot(new Slot(playerInv, i1, 8 + i1 * 18, offset + 142));
-            }
+            this.addSlot(new Slot(playerInv, i1, 8 + i1 * 18, offset + 142));
         }
     }
     public int offset()

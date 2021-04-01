@@ -1,4 +1,6 @@
 {
-  "block.backpack_mod.golden_backpack_block": "Golden Backpack Block",
-  "block.backpack_mod.netherite_backpack_block": "Netherite Backpack Block"
+  "block.backpack_mod.golden_backpack": "Golden Backpack",
+  "block.backpack_mod.netherite_backpack": "Netherite Backpack",
+  "item.backpack_mod.backpack": "Backpack",
+  "item.backpack_mod.netherite_backpack": "Netherite Backpack"
 }
