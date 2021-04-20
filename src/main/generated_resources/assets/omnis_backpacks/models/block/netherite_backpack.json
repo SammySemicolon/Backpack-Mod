@@ -1,0 +1,6 @@
+{
+  "parent": "omnis_backpacks:block/backpack",
+  "textures": {
+    "nocolor": "omnis_backpacks:block/netherite_backpack"
+  }
+}

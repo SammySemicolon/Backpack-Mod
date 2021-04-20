@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:shulker_box",
+    "omnis_backpacks:backpack",
+    "omnis_backpacks:netherite_backpack"
+  ]
+}

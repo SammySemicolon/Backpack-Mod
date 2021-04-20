@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "omnis_backpacks:block/golden_backpack"
+    },
+    "facing=south": {
+      "model": "omnis_backpacks:block/golden_backpack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "omnis_backpacks:block/golden_backpack",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "omnis_backpacks:block/golden_backpack",
+      "y": 90
+    }
+  }
+}

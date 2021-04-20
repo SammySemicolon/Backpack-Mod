@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:shulker_box",
-    "backpack_mod:backpack",
-    "backpack_mod:netherite_backpack"
-  ]
-}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omnis_backpacks:item/backpack_base",
+    "layer1": "omnis_backpacks:item/backpack_netherite_overlay"
+  }
+}

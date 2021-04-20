@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "backpack_mod:item/backpack_base",
-    "layer1": "backpack_mod:item/backpack_gold_overlay"
-  }
-}

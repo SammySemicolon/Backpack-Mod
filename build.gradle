@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0'
-group = 'com.sammy.backpack_mod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'backpack_mod'
+group = 'com.sammy.omnis_backpacks' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'omnis_backpacks'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -33,7 +33,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                backpack_mod {
+                omnis_backpacks {
                     source sourceSets.main
                 }
             }
@@ -47,7 +47,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                backpack_mod {
+                omnis_backpacks {
                     source sourceSets.main
                 }
             }
@@ -60,10 +60,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'backpack_mod', '--all', '--output', file('src/main/generated_resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'omnis_backpacks', '--all', '--output', file('src/main/generated_resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                backpack_mod {
+                omnis_backpacks {
                     source sourceSets.main
                 }
             }
@@ -98,12 +98,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title": "backpack_mod",
-                "Specification-Vendor": "backpack_modsareus",
+                "Specification-Title": "omnis_backpacks",
+                "Specification-Vendor": "omnis_backpackssareus",
                 "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"backpack_modsareus",
+                "Implementation-Vendor" :"omnis_backpackssareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

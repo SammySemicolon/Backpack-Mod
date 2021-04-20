@@ -2,25 +2,19 @@ modLoader="javafml"
 loaderVersion="[33,)"
 license="All rights reserved"
 [[mods]]
-modId="backpack_mod"
+modId="omnis_backpacks"
 version="${file.jarVersion}"
-displayName="Backpack Mod"
+displayName="Omnis Backpacks"
+logoFile="icon.png"
 credits='''The Minecraft Modding Discord and everyone there.
 Its an amazing place full of a ton of amazing people, this mod wouldnt be possible without them.'''
 authors="Sammy"
 description='''
-Description goes here
+Omnis Backpacks is an addon to Omnis. It adds backpacks! (what a surprise!)
 '''
-[[dependencies.mod_name]]
+[[dependencies.omnis_backpacks]]
     modId="forge"
     mandatory=true
     versionRange="[34.0.5,)"
     ordering="NONE"
-    side="BOTH"
-
-[[dependencies.mod_name]]
-    modId="curios"
-    mandatory=true
-    versionRange="[1.16.4,1.17)"
-    ordering="AFTER"
     side="BOTH"

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#X#",
+    "#Y#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:leather"
+    },
+    "Y": {
+      "tag": "forge:chests/wooden"
+    },
+    "X": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "omnis_backpacks:backpack"
+  }
+}
