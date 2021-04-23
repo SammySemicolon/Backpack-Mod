@@ -151,6 +151,7 @@ public class SimpleInventory extends ItemStackHandler
     public void readData(CompoundNBT compound, String name)
     {
         deserializeNBT((CompoundNBT) Objects.requireNonNull(compound.get(name)));
+
     }
     
     public CompoundNBT writeData(CompoundNBT compound, String name)

@@ -10,13 +10,13 @@
       "tag": "forge:leather"
     },
     "Y": {
-      "tag": "forge:chests/wooden"
+      "tag": "forge:chests/ender"
     },
     "X": {
-      "tag": "forge:ingots/gold"
+      "tag": "forge:ingots/iron"
     }
   },
   "result": {
-    "item": "omnis_backpacks:backpack"
+    "item": "omnis_backpacks:ender_backpack"
   }
 }

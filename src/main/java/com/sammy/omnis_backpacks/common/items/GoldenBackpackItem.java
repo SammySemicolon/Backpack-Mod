@@ -10,6 +10,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,9 +33,9 @@ public class GoldenBackpackItem extends AbstractBackpackItem
     {
         if (type != null)
         {
-            return "backpack_mod:textures/block/golden_backpack.png";
+            return "omnis_backpacks:textures/block/golden_backpack.png";
         }
-        return "backpack_mod:textures/block/backpack_base.png";
+        return "omnis_backpacks:textures/block/backpack_base.png";
     }
     @Override
     public void openContainer(World world, PlayerEntity player, ItemStack backpack)
@@ -44,5 +46,7 @@ public class GoldenBackpackItem extends AbstractBackpackItem
                     new SimpleNamedContainerProvider((w, p, pl) -> new GoldenBackpackContainer(w, p, backpack), backpack.getDisplayName());
             NetworkHooks.openGui((ServerPlayerEntity) player, container, b -> b.writeItemStack(backpack));
         }
+        player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
+
     }
 }

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 @SuppressWarnings("unused")
-//@Mod.EventBusSubscriber(modid = BackpackMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = BackpackMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NetworkManager
 {
     public static final String PROTOCOL_VERSION = "1";

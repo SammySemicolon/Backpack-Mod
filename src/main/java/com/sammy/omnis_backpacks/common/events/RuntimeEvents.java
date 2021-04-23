@@ -28,42 +28,45 @@ public class RuntimeEvents
         PlayerEntity playerEntity = event.getPlayer();
         if (event.getHand().equals(Hand.MAIN_HAND))
         {
-            if (playerEntity.isSneaking())
+            if (playerEntity.getHeldItem(Hand.MAIN_HAND).isEmpty())
             {
-                TileEntity tileEntity = world.getTileEntity(event.getPos());
-                ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
-                if (tileEntity instanceof BackpackTileEntity)
+                if (playerEntity.isSneaking())
                 {
-                    BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
-                    if (backpack.isEmpty())
+                    TileEntity tileEntity = world.getTileEntity(event.getPos());
+                    ItemStack backpack = playerEntity.inventory.armorInventory.get(2);
+                    if (tileEntity instanceof BackpackTileEntity)
                     {
-                        if (BackpackModHelper.areWeOnServer(world))
+                        BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
+                        if (backpack.isEmpty())
                         {
-                            playerEntity.inventory.armorInventory.set(2, backpackTileEntity.backpack);
-                            world.removeBlock(event.getPos(), true);
+                            if (BackpackModHelper.areWeOnServer(world))
+                            {
+                                playerEntity.inventory.armorInventory.set(2, backpackTileEntity.backpack);
+                                world.removeBlock(event.getPos(), true);
+                            }
+                            world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
+                            playerEntity.swingArm(Hand.MAIN_HAND);
                         }
-                        world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
-                        playerEntity.swingArm(Hand.MAIN_HAND);
                     }
-                }
-                else if (backpack.getItem() instanceof AbstractBackpackItem)
-                {
-                    AbstractBackpackItem backpackItem = (AbstractBackpackItem) backpack.getItem();
-                    BlockPos pos = event.getPos().offset(event.getHitVec().getFace());
-                    if (world.getBlockState(pos).isAir())
+                    else if (backpack.getItem() instanceof AbstractBackpackItem)
                     {
-                        playerEntity.inventory.armorInventory.set(2, ItemStack.EMPTY);
-                        BlockState backpackState = backpackItem.backpackBlock.getDefaultState().with(BackpackBlock.HORIZONTAL_FACING, playerEntity.getHorizontalFacing());
-                        world.setBlockState(pos, backpackState);
-                        tileEntity = world.getTileEntity(pos);
-                        if (tileEntity instanceof BackpackTileEntity)
+                        AbstractBackpackItem backpackItem = (AbstractBackpackItem) backpack.getItem();
+                        BlockPos pos = event.getPos().offset(event.getHitVec().getFace());
+                        if (world.getBlockState(pos).isAir())
                         {
-                            BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
-                            backpackTileEntity.backpack = backpack.copy();
-                            world.notifyBlockUpdate(pos, backpackState, backpackState, 3);
+                            playerEntity.inventory.armorInventory.set(2, ItemStack.EMPTY);
+                            BlockState backpackState = backpackItem.backpackBlock.getDefaultState().with(BackpackBlock.HORIZONTAL_FACING, playerEntity.getHorizontalFacing());
+                            world.setBlockState(pos, backpackState);
+                            tileEntity = world.getTileEntity(pos);
+                            if (tileEntity instanceof BackpackTileEntity)
+                            {
+                                BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
+                                backpackTileEntity.backpack = backpack.copy();
+                                world.notifyBlockUpdate(pos, backpackState, backpackState, 3);
+                            }
+                            world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
+                            playerEntity.swingArm(Hand.MAIN_HAND);
                         }
-                        world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
-                        playerEntity.swingArm(Hand.MAIN_HAND);
                     }
                 }
             }

@@ -26,7 +26,7 @@ public class OpenBackpackPacket
     {
         context.get().enqueueWork(() -> {
             PlayerEntity playerEntity = context.get().getSender();
-            ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
+            ItemStack backpack = playerEntity.inventory.armorInventory.get(2);
             if (backpack.getItem() instanceof AbstractBackpackItem)
             {
                 AbstractBackpackItem backpackItem = (AbstractBackpackItem) backpack.getItem();

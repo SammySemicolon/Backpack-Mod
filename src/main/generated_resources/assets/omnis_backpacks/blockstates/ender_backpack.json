@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "omnis_backpacks:block/ender_backpack"
+    },
+    "facing=south": {
+      "model": "omnis_backpacks:block/ender_backpack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "omnis_backpacks:block/ender_backpack",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "omnis_backpacks:block/ender_backpack",
+      "y": 90
+    }
+  }
+}

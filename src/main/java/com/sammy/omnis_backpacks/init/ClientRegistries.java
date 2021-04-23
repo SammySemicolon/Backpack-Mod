@@ -1,6 +1,7 @@
 package com.sammy.omnis_backpacks.init;
 
 import com.sammy.omnis_backpacks.common.blocks.BackpackTileEntity;
+import com.sammy.omnis_backpacks.container.ender.EnderBackpackScreen;
 import com.sammy.omnis_backpacks.container.gold.GoldenBackpackScreen;
 import com.sammy.omnis_backpacks.container.netherite.NetheriteBackpackScreen;
 import net.minecraft.block.Block;
@@ -41,10 +42,12 @@ public class ClientRegistries
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {
             ScreenManager.registerFactory(Registries.GOLDEN_BACKPACK_CONTAINER.get(), GoldenBackpackScreen::new);
+            ScreenManager.registerFactory(Registries.ENDER_BACKPACK_CONTAINER.get(), EnderBackpackScreen::new);
             ScreenManager.registerFactory(Registries.NETHERITE_BACKPACK_CONTAINER.get(), NetheriteBackpackScreen::new);
         });
         setCutout(Registries.GOLDEN_BACKPACK_BLOCK);
         setCutout(Registries.NETHERITE_BACKPACK_BLOCK);
+        setCutout(Registries.ENDER_BACKPACK_BLOCK);
 
     }
 
@@ -69,14 +72,15 @@ public class ClientRegistries
                 }
             }
             return -1;
-        }, Registries.GOLDEN_BACKPACK_BLOCK.get(), Registries.NETHERITE_BACKPACK_BLOCK.get());
+        }, Registries.GOLDEN_BACKPACK_BLOCK.get(), Registries.ENDER_BACKPACK_BLOCK.get(), Registries.NETHERITE_BACKPACK_BLOCK.get());
     }
     @SubscribeEvent
     public static void setItemColors(ColorHandlerEvent.Item event)
     {
         ItemColors itemColors = event.getItemColors();
         itemColors.register((stack, color) ->
-                color > 0 ? -1 : ((IDyeableArmorItem) stack.getItem()).getColor(stack), Registries.BACKPACK.get(), Registries.NETHERITE_BACKPACK.get());
+                color > 0 ? -1 : ((IDyeableArmorItem) stack.getItem()).getColor(stack),
+                Registries.BACKPACK.get(), Registries.ENDER_BACKPACK.get(), Registries.NETHERITE_BACKPACK.get());
     }
     public static void setCutout(RegistryObject<Block> b)
     {

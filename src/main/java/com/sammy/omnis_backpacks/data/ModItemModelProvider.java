@@ -23,30 +23,15 @@ public class ModItemModelProvider extends net.minecraftforge.client.model.genera
     @Override
     protected void registerModels()
     {
-//        Set<RegistryObject<Item>> items = new HashSet<>(ITEMS.getEntries());
         backpackItem(Registries.BACKPACK, "backpack_gold_overlay");
         backpackItem(Registries.NETHERITE_BACKPACK, "backpack_netherite_overlay");
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof WallBlock).forEach(this::wallBlockItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof FenceBlock).forEach(this::fenceBlockItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoorBlock).forEach(this::generatedItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof TrapDoorBlock).forEach(this::trapdoorBlockItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof PressurePlateBlock).forEach(this::pressurePlateBlockItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof AbstractButtonBlock).forEach(this::buttonBlockItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof BushBlock && !(((BlockItem) i.get()).getBlock() instanceof DoublePlantBlock)).forEach(this::blockGeneratedItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof DoublePlantBlock).forEach(this::generatedItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof LanternBlock).forEach(this::generatedItem);
-//        takeAll(items, i -> i.get() instanceof BlockItem && ((BlockItem) i.get()).getBlock() instanceof TorchBlock).forEach(this::generatedItem);
-//
-//        takeAll(items, i -> i.get() instanceof BlockItem).forEach(this::blockItem);
-//        takeAll(items, i -> i.get() instanceof ToolItem).forEach(this::handheldItem);
-//        takeAll(items, i -> i.get() instanceof SwordItem).forEach(this::handheldItem);
-//        takeAll(items, i -> i.get() instanceof BowItem).forEach(this::handheldItem);
-//        items.forEach(this::generatedItem);
+        backpackItem(Registries.ENDER_BACKPACK, "backpack_ender_overlay");
+
     }
 
     private static final ResourceLocation GENERATED = new ResourceLocation("item/generated");
     private static final ResourceLocation HANDHELD = new ResourceLocation("item/handheld");
-    
+
     private void handheldItem(RegistryObject<Item> i)
     {
         String name = Registry.ITEM.getKey(i.get()).getPath();

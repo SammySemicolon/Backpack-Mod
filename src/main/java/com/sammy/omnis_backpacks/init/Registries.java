@@ -2,8 +2,10 @@ package com.sammy.omnis_backpacks.init;
 
 import com.sammy.omnis_backpacks.common.blocks.BackpackBlock;
 import com.sammy.omnis_backpacks.common.blocks.BackpackTileEntity;
+import com.sammy.omnis_backpacks.common.items.EnderBackpackItem;
 import com.sammy.omnis_backpacks.common.items.GoldenBackpackItem;
 import com.sammy.omnis_backpacks.common.items.NetheriteBackpackItem;
+import com.sammy.omnis_backpacks.container.ender.EnderBackpackContainer;
 import com.sammy.omnis_backpacks.container.gold.GoldenBackpackContainer;
 import com.sammy.omnis_backpacks.container.netherite.NetheriteBackpackContainer;
 import net.minecraft.block.AbstractBlock;
@@ -35,6 +37,9 @@ public class Registries
     public static final RegistryObject<ContainerType<GoldenBackpackContainer>> GOLDEN_BACKPACK_CONTAINER = CONTAINERS.register(
             "golden_backpack_container", () -> IForgeContainerType.create(
                     GoldenBackpackContainer::makeContainer));
+    public static final RegistryObject<ContainerType<EnderBackpackContainer>> ENDER_BACKPACK_CONTAINER = CONTAINERS.register(
+            "ender_backpack_container", () -> IForgeContainerType.create(
+                    EnderBackpackContainer::makeContainer));
     public static final RegistryObject<ContainerType<NetheriteBackpackContainer>> NETHERITE_BACKPACK_CONTAINER =
             CONTAINERS.register(
             "netherite_backpack_container", () -> IForgeContainerType.create(
@@ -42,10 +47,12 @@ public class Registries
 
     public static final RegistryObject<Block> GOLDEN_BACKPACK_BLOCK = BLOCKS.register("golden_backpack", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL).notSolid()));
     public static final RegistryObject<Block> NETHERITE_BACKPACK_BLOCK = BLOCKS.register("netherite_backpack", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.BROWN_WOOL).notSolid()));
+    public static final RegistryObject<Block> ENDER_BACKPACK_BLOCK = BLOCKS.register("ender_backpack", () -> new BackpackBlock(AbstractBlock.Properties.from(Blocks.ENDER_CHEST).notSolid()));
 
     public static final RegistryObject<TileEntityType<?>> BACKPACK_TE = TILE_ENTITIES.register("abstruse_block_tile_entity", () -> TileEntityType.Builder.create((Supplier<TileEntity>) BackpackTileEntity::new, GOLDEN_BACKPACK_BLOCK.get(), NETHERITE_BACKPACK_BLOCK.get()).build(null));
 
     public static final RegistryObject<Item> NETHERITE_BACKPACK = ITEMS.register("netherite_backpack", () -> new NetheriteBackpackItem(NETHERITE_BACKPACK_BLOCK.get(), GEAR_PROPERTIES()));
+    public static final RegistryObject<Item> ENDER_BACKPACK = ITEMS.register("ender_backpack", () -> new EnderBackpackItem(ENDER_BACKPACK_BLOCK.get(), GEAR_PROPERTIES()));
     public static final RegistryObject<Item> BACKPACK = ITEMS.register("backpack", () -> new GoldenBackpackItem(GOLDEN_BACKPACK_BLOCK.get(), GEAR_PROPERTIES()));
 
     public static Item.Properties GEAR_PROPERTIES()

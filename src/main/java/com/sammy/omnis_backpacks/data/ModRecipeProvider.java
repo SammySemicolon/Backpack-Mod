@@ -31,7 +31,8 @@ public class ModRecipeProvider extends RecipeProvider
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
-        ShapedRecipeBuilder.shapedRecipe(Registries.BACKPACK.get()).key('#', Tags.Items.LEATHER).key('Y', Tags.Items.CHESTS_WOODEN).key('X', Items.GOLD_INGOT).patternLine("#X#").patternLine("#Y#").patternLine("###").addCriterion("has_gold", hasItem(Items.GOLD_INGOT)).build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(Registries.BACKPACK.get()).key('#', Tags.Items.LEATHER).key('Y', Tags.Items.CHESTS_WOODEN).key('X', Tags.Items.INGOTS_GOLD).patternLine("#X#").patternLine("#Y#").patternLine("###").addCriterion("has_gold", hasItem(Items.GOLD_INGOT)).build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(Registries.ENDER_BACKPACK.get()).key('#', Tags.Items.LEATHER).key('Y', Tags.Items.CHESTS_ENDER).key('X', Tags.Items.INGOTS_IRON).patternLine("#X#").patternLine("#Y#").patternLine("###").addCriterion("has_gold", hasItem(Items.GOLD_INGOT)).build(consumer);
         smithingReinforce(consumer, Registries.BACKPACK.get(), Registries.NETHERITE_BACKPACK.get());
     }
     private static void smithingReinforce(Consumer<IFinishedRecipe> recipeConsumer, Item itemToReinforce, Item output)
