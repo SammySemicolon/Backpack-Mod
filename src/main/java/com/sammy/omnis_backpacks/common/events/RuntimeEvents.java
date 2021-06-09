@@ -2,6 +2,7 @@ package com.sammy.omnis_backpacks.common.events;
 
 import com.sammy.omnis_backpacks.BackpackMod;
 import com.sammy.omnis_backpacks.BackpackModHelper;
+import com.sammy.omnis_backpacks.HiddenHelper;
 import com.sammy.omnis_backpacks.common.blocks.BackpackBlock;
 import com.sammy.omnis_backpacks.common.blocks.BackpackTileEntity;
 import com.sammy.omnis_backpacks.common.items.AbstractBackpackItem;
@@ -16,7 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import top.theillusivec4.curios.api.CuriosApi;
 
 @Mod.EventBusSubscriber(modid = BackpackMod.MODID)
 public class RuntimeEvents
@@ -26,6 +30,14 @@ public class RuntimeEvents
     {
         World world = event.getWorld();
         PlayerEntity playerEntity = event.getPlayer();
+        if (ModList.get().isLoaded("curios"))
+        {
+            boolean success = HiddenHelper.curiosEvent(event);
+            if (success)
+            {
+                return;
+            }
+        }
         if (event.getHand().equals(Hand.MAIN_HAND))
         {
             if (playerEntity.getHeldItem(Hand.MAIN_HAND).isEmpty())
@@ -39,13 +51,13 @@ public class RuntimeEvents
                         BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
                         if (backpack.isEmpty())
                         {
+                            world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
+                            playerEntity.swingArm(Hand.MAIN_HAND);
                             if (BackpackModHelper.areWeOnServer(world))
                             {
                                 playerEntity.inventory.armorInventory.set(2, backpackTileEntity.backpack);
                                 world.removeBlock(event.getPos(), true);
                             }
-                            world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
-                            playerEntity.swingArm(Hand.MAIN_HAND);
                         }
                     }
                     else if (backpack.getItem() instanceof AbstractBackpackItem)

@@ -31,16 +31,10 @@ public class EnderBackpackItem extends AbstractBackpackItem
         super(backpackBlock, properties);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    @Nullable
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
+    public String overlayTexture()
     {
-        if (type != null)
-        {
-            return "omnis_backpacks:textures/block/ender_backpack.png";
-        }
-        return "omnis_backpacks:textures/block/backpack_base.png";
+        return "textures/block/ender_backpack.png";
     }
 
     @Override

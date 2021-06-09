@@ -1,0 +1,9 @@
+{
+  "block.omnis_backpacks.ender_backpack": "Эндер Рюкзак",
+  "block.omnis_backpacks.golden_backpack": "Золотой Рюкзак",
+  "block.omnis_backpacks.netherite_backpack": "Незеритовый Рюкзак",
+  "item.omnis_backpacks.backpack": "Рюкзак",
+  "item.omnis_backpacks.ender_backpack": "Эндер Рюкзак",
+  "item.omnis_backpacks.netherite_backpack": "Незеритовый Рюкзак",
+  "key.omnis_backpack": "Открыть Omnis Рюкзак"
+}

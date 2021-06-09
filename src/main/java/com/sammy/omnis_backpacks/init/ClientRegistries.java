@@ -29,7 +29,7 @@ import static com.sammy.omnis_backpacks.BackpackMod.MODID;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MODID, value = Dist.CLIENT)
 public class ClientRegistries
 {
-    public static final KeyBinding BACKPACK_KEYBINDING = new KeyBinding("key.backpack", GLFW.GLFW_KEY_B, "key.categories.misc");
+    public static final KeyBinding BACKPACK_KEYBINDING = new KeyBinding("key.omnis_backpack", GLFW.GLFW_KEY_B, "key.categories.misc");
     @SubscribeEvent
     public static void registerKeybind(FMLClientSetupEvent event)
     {

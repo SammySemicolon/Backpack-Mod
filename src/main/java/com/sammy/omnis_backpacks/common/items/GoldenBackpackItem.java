@@ -26,17 +26,12 @@ public class GoldenBackpackItem extends AbstractBackpackItem
         super(backpackBlock, properties);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    @Nullable
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
+    public String overlayTexture()
     {
-        if (type != null)
-        {
-            return "omnis_backpacks:textures/block/golden_backpack.png";
-        }
-        return "omnis_backpacks:textures/block/backpack_base.png";
+        return "textures/block/golden_backpack.png";
     }
+
     @Override
     public void openContainer(World world, PlayerEntity player, ItemStack backpack)
     {
