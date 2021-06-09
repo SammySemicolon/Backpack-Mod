@@ -119,6 +119,13 @@ public class HiddenHelper
             @Override
             public boolean canEquip(String identifier, LivingEntity livingEntity)
             {
+                if (livingEntity instanceof PlayerEntity)
+                {
+                    if (((PlayerEntity) livingEntity).openContainer != null)
+                    {
+                        return true;
+                    }
+                }
                 return livingEntity.isSneaking();
             }
 
@@ -160,30 +167,6 @@ public class HiddenHelper
                 return true;
             }
         });
-    }
-    public static void openBackpackGui()
-    {
-        Minecraft minecraft = Minecraft.getInstance();
-        PlayerEntity playerEntity = minecraft.player;
-        if (!(minecraft.currentScreen instanceof AbstractBackpackScreen))
-        {
-            if (ClientRegistries.BACKPACK_KEYBINDING.isKeyDown())
-            {
-                ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
-                if (ModList.get().isLoaded("curios"))
-                {
-                    ItemStack newBackpack = equippedBackpackCurio(playerEntity).stack;
-                    if (!newBackpack.isEmpty())
-                    {
-                        backpack = newBackpack;
-                    }
-                }
-                if (backpack.getItem() instanceof AbstractBackpackItem)
-                {
-                    NetworkManager.INSTANCE.send(PacketDistributor.SERVER.noArg(), new OpenBackpackPacket());
-                }
-            }
-        }
     }
 
     public static Pair equippedBackpackCurio(LivingEntity entity)
