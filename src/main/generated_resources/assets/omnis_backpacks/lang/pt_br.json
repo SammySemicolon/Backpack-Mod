@@ -1,0 +1,9 @@
+{
+  "block.omnis_backpacks.ender_backpack": "Mochila de Ender",
+  "block.omnis_backpacks.golden_backpack": "Mochila de Ouro",
+  "block.omnis_backpacks.netherite_backpack": "Mochila de Netherita",
+  "item.omnis_backpacks.backpack": "Mochila",
+  "item.omnis_backpacks.ender_backpack": "Mochila de Ender",
+  "item.omnis_backpacks.netherite_backpack": "Mochila de Netherita",
+  "key.backpack": "Abrir Mochila"
+}
