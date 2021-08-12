@@ -42,66 +42,14 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class HiddenHelper
 {
-    public static boolean curiosEvent(PlayerInteractEvent.RightClickBlock event)
-    {
-        World world = event.getWorld();
-        PlayerEntity playerEntity = event.getPlayer();
-        IItemHandlerModifiable handler = CuriosApi.getCuriosHelper().getEquippedCurios(playerEntity).resolve().get();
-        if (event.getHand().equals(Hand.MAIN_HAND))
-        {
-            if (playerEntity.getHeldItem(Hand.MAIN_HAND).isEmpty())
-            {
-                if (playerEntity.isSneaking())
-                {
-                    TileEntity tileEntity = world.getTileEntity(event.getPos());
-                    Pair pair = equippedBackpackCurio(playerEntity);
-                    ItemStack backpack = pair.stack;
-                    if (tileEntity instanceof BackpackTileEntity)
-                    {
-                        BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
-                        if (backpack.isEmpty())
-                        {
-                            world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
-                            playerEntity.swingArm(Hand.MAIN_HAND);
-                            if (BackpackModHelper.areWeOnServer(world))
-                            {
-                                handler.setStackInSlot(pair.index, backpackTileEntity.backpack);
-                                world.removeBlock(event.getPos(), true);
-                            }
-                            return true;
-                        }
-                    }
-                    else if (backpack.getItem() instanceof AbstractBackpackItem)
-                    {
-                        AbstractBackpackItem backpackItem = (AbstractBackpackItem) backpack.getItem();
-                        BlockPos pos = event.getPos().offset(event.getHitVec().getFace());
-                        if (world.getBlockState(pos).isAir())
-                        {
-                            handler.setStackInSlot(pair.index, ItemStack.EMPTY);
-                            BlockState backpackState = backpackItem.backpackBlock.getDefaultState().with(BackpackBlock.HORIZONTAL_FACING, playerEntity.getHorizontalFacing());
-                            world.setBlockState(pos, backpackState);
-                            tileEntity = world.getTileEntity(pos);
-                            if (tileEntity instanceof BackpackTileEntity)
-                            {
-                                BackpackTileEntity backpackTileEntity = (BackpackTileEntity) tileEntity;
-                                backpackTileEntity.backpack = backpack.copy();
-                                world.notifyBlockUpdate(pos, backpackState, backpackState, 3);
-                            }
-                            world.playSound(playerEntity, event.getPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1, 1);
-                            playerEntity.swingArm(Hand.MAIN_HAND);
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
     public static void addCuriosSlot()
     {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BACK.getMessageBuilder().build());

@@ -18,7 +18,7 @@ public class BackpackMod
 {
     public static final String MODID = "omnis_backpacks";
     private static final Logger LOGGER = LogManager.getLogger();
-
+    public static boolean isCuriosLoaded = false;
     public BackpackMod()
     {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();

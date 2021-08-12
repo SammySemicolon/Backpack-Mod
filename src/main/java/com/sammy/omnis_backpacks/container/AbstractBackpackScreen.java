@@ -67,9 +67,7 @@ public abstract class AbstractBackpackScreen extends ContainerScreen<AbstractBac
 	{
 		if (this.minecraft != null && this.minecraft.player != null)
 		{
-			ItemStack backpack = container.backpack;
-			IDyeableArmorItem coloredBackpack = (IDyeableArmorItem) backpack.getItem();
-			Color color = new Color(coloredBackpack.getColor(backpack));
+			Color color = container.color;
 			Color insideColor = color.darker().darker().darker();
 			Color outlineColor = color.darker().darker();
 			String text = title.getString();
@@ -91,10 +89,8 @@ public abstract class AbstractBackpackScreen extends ContainerScreen<AbstractBac
 		this.minecraft.getTextureManager().bindTexture(texture);
 		blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
 
-		ItemStack backpack = container.backpack;
-		IDyeableArmorItem coloredBackpack = (IDyeableArmorItem) backpack.getItem();
+		Color color = container.color;
 		this.minecraft.getTextureManager().bindTexture(overlayTexture);
-		Color color = new Color(coloredBackpack.getColor(backpack));
 		RenderSystem.color3f(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f);
 		blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
 	}

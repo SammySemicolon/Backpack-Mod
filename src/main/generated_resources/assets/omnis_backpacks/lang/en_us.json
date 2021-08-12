@@ -5,5 +5,5 @@
   "item.omnis_backpacks.backpack": "Backpack",
   "item.omnis_backpacks.ender_backpack": "Ender Backpack",
   "item.omnis_backpacks.netherite_backpack": "Netherite Backpack",
-  "key.backpack": "Open Backpack"
+  "key.omnis_backpacks": "Open Omnis Backpack"
 }

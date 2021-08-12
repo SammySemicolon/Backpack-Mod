@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.inventory.container.ShulkerBoxContainer;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -18,6 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 
 public class NetheriteBackpackItem extends AbstractBackpackItem
 {
@@ -41,6 +43,5 @@ public class NetheriteBackpackItem extends AbstractBackpackItem
             NetworkHooks.openGui((ServerPlayerEntity) player, container, b -> b.writeItemStack(backpack));
         }
         player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
-
     }
 }

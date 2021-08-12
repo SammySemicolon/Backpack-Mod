@@ -1,5 +1,6 @@
 package com.sammy.omnis_backpacks.common.events;
 
+import com.sammy.omnis_backpacks.BackpackMod;
 import com.sammy.omnis_backpacks.HiddenHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -17,5 +18,6 @@ public class StartupEvents
             return;
         }
         HiddenHelper.addCuriosSlot();
+        BackpackMod.isCuriosLoaded = true;
     }
 }

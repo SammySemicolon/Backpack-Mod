@@ -39,6 +39,5 @@ public class BackpackTileEntity extends SimpleTileEntity
         {
             backpack = ItemStack.read(compound.getCompound("backpack"));
         }
-        compound.get("");
     }
 }

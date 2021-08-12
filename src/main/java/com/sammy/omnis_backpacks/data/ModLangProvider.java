@@ -43,7 +43,7 @@ public class ModLangProvider extends LanguageProvider
                 add(i.get().getTranslationKey(), name);
             }
         });
-        add("key.omnis_backpack", "Open Omnis Backpack");
+        add("key.omnis_backpacks", "Open Omnis Backpack");
     }
     
     @Override

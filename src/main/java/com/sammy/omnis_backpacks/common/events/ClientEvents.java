@@ -24,27 +24,24 @@ public class ClientEvents
     @SubscribeEvent
     public static void openBackpackGui(TickEvent.ClientTickEvent event)
     {
-        if (FMLEnvironment.dist == Dist.CLIENT)
+        Minecraft minecraft = Minecraft.getInstance();
+        PlayerEntity playerEntity = minecraft.player;
+        if (!(minecraft.currentScreen instanceof AbstractBackpackScreen))
         {
-            Minecraft minecraft = Minecraft.getInstance();
-            PlayerEntity playerEntity = minecraft.player;
-            if (!(minecraft.currentScreen instanceof AbstractBackpackScreen))
+            if (ClientRegistries.BACKPACK_KEYBINDING.isKeyDown())
             {
-                if (ClientRegistries.BACKPACK_KEYBINDING.isKeyDown())
+                ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
+                if (BackpackMod.isCuriosLoaded)
                 {
-                    ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
-                    if (ModList.get().isLoaded("curios"))
+                    ItemStack newBackpack = HiddenHelper.equippedBackpackCurio(playerEntity).stack;
+                    if (!newBackpack.isEmpty())
                     {
-                        ItemStack newBackpack = HiddenHelper.equippedBackpackCurio(playerEntity).stack;
-                        if (!newBackpack.isEmpty())
-                        {
-                            backpack = newBackpack;
-                        }
+                        backpack = newBackpack;
                     }
-                    if (backpack.getItem() instanceof AbstractBackpackItem)
-                    {
-                        NetworkManager.INSTANCE.send(PacketDistributor.SERVER.noArg(), new OpenBackpackPacket());
-                    }
+                }
+                if (backpack.getItem() instanceof AbstractBackpackItem)
+                {
+                    NetworkManager.INSTANCE.send(PacketDistributor.SERVER.noArg(), new OpenBackpackPacket());
                 }
             }
         }

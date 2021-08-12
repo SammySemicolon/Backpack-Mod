@@ -23,6 +23,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 
 public class EnderBackpackItem extends AbstractBackpackItem
 {
@@ -43,7 +44,7 @@ public class EnderBackpackItem extends AbstractBackpackItem
         if (BackpackModHelper.areWeOnServer(world))
         {
             INamedContainerProvider container =
-                    new SimpleNamedContainerProvider((w, p, pl) -> new EnderBackpackContainer(w, p, backpack, player.getInventoryEnderChest()), backpack.getDisplayName());
+                    new SimpleNamedContainerProvider((w, p, pl) -> new EnderBackpackContainer(w, p, player.getInventoryEnderChest(), backpack), backpack.getDisplayName());
             NetworkHooks.openGui((ServerPlayerEntity) player, container, b -> b.writeItemStack(backpack));
         }
         player.world.playSound(null, player.getPosition(), SoundEvents.BLOCK_ENDER_CHEST_OPEN, SoundCategory.PLAYERS,1,1);

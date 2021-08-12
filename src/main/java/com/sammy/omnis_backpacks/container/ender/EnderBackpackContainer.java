@@ -10,22 +10,19 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
+import java.awt.*;
+
 public class EnderBackpackContainer extends AbstractBackpackContainer
 {
-    public EnderBackpackContainer(int windowId, PlayerInventory playerInv, ItemStack backpack, EnderChestInventory enderInv)
+    public EnderBackpackContainer(int windowId, PlayerInventory playerInv, EnderChestInventory enderInv, ItemStack backpack)
     {
-        super(Registries.ENDER_BACKPACK_CONTAINER.get(), windowId, playerInv, backpack, enderInv);
+        super(Registries.ENDER_BACKPACK_CONTAINER.get(), windowId, playerInv, enderInv, backpack);
     }
 
     @Override
     public void onContainerClosed(PlayerEntity playerIn)
     {
-        playerIn.world.playSound(null, playerIn.getPosition(), SoundEvents.BLOCK_ENDER_CHEST_CLOSE, SoundCategory.PLAYERS,1,1);
+        playerIn.world.playSound(null, playerIn.getPosition(), SoundEvents.BLOCK_ENDER_CHEST_CLOSE, SoundCategory.PLAYERS, 1, 1);
         super.onContainerClosed(playerIn);
-    }
-
-    public static EnderBackpackContainer makeContainer(int windowId, PlayerInventory inv, PacketBuffer buf)
-    {
-        return new EnderBackpackContainer(windowId, inv, buf.readItemStack(), inv.player.getInventoryEnderChest());
     }
 }

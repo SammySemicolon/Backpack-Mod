@@ -1,5 +1,6 @@
 package com.sammy.omnis_backpacks.network.packets;
 
+import com.sammy.omnis_backpacks.BackpackMod;
 import com.sammy.omnis_backpacks.HiddenHelper;
 import com.sammy.omnis_backpacks.common.items.AbstractBackpackItem;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +30,7 @@ public class OpenBackpackPacket
         context.get().enqueueWork(() -> {
             PlayerEntity playerEntity = context.get().getSender();
             ItemStack backpack = playerEntity.inventory.armorInventory.get(2);
-            if (ModList.get().isLoaded("curios"))
+            if (BackpackMod.isCuriosLoaded)
             {
                 ItemStack newBackpack = HiddenHelper.equippedBackpackCurio(playerEntity).stack;
                 if (!newBackpack.isEmpty())
