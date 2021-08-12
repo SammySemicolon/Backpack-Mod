@@ -24,24 +24,27 @@ public class ClientEvents
     @SubscribeEvent
     public static void openBackpackGui(TickEvent.ClientTickEvent event)
     {
-        Minecraft minecraft = Minecraft.getInstance();
-        PlayerEntity playerEntity = minecraft.player;
-        if (!(minecraft.currentScreen instanceof AbstractBackpackScreen))
+        if (FMLEnvironment.dist == Dist.CLIENT)
         {
-            if (ClientRegistries.BACKPACK_KEYBINDING.isKeyDown())
+            Minecraft minecraft = Minecraft.getInstance();
+            PlayerEntity playerEntity = minecraft.player;
+            if (!(minecraft.currentScreen instanceof AbstractBackpackScreen))
             {
-                ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
-                if (BackpackMod.isCuriosLoaded)
+                if (ClientRegistries.BACKPACK_KEYBINDING.isKeyDown())
                 {
-                    ItemStack newBackpack = HiddenHelper.equippedBackpackCurio(playerEntity).stack;
-                    if (!newBackpack.isEmpty())
+                    ItemStack backpack = playerEntity.inventory.armorItemInSlot(2);
+                    if (BackpackMod.isCuriosLoaded)
                     {
-                        backpack = newBackpack;
+                        ItemStack newBackpack = HiddenHelper.equippedBackpackCurio(playerEntity).stack;
+                        if (!newBackpack.isEmpty())
+                        {
+                            backpack = newBackpack;
+                        }
                     }
-                }
-                if (backpack.getItem() instanceof AbstractBackpackItem)
-                {
-                    NetworkManager.INSTANCE.send(PacketDistributor.SERVER.noArg(), new OpenBackpackPacket());
+                    if (backpack.getItem() instanceof AbstractBackpackItem)
+                    {
+                        NetworkManager.INSTANCE.send(PacketDistributor.SERVER.noArg(), new OpenBackpackPacket());
+                    }
                 }
             }
         }
