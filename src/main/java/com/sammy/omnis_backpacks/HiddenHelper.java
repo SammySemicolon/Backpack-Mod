@@ -94,9 +94,8 @@ public class HiddenHelper
                     model = new BackpackModel();
                 }
 
-                model.setRotationAngles(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-                model.setLivingAnimations(livingEntity, limbSwing, limbSwingAmount, partialTicks);
-
+                ICurio.RenderHelper.translateIfSneaking(matrixStack, livingEntity);
+                ICurio.RenderHelper.rotateIfSneaking(matrixStack, livingEntity);
                 int i = ((IDyeableArmorItem)stack.getItem()).getColor(stack);
                 float r = (float)(i >> 16 & 255) / 255.0F;
                 float g = (float)(i >> 8 & 255) / 255.0F;

@@ -3,6 +3,7 @@ package com.sammy.omnis_backpacks.common.items;
 import com.sammy.omnis_backpacks.BackpackMod;
 import com.sammy.omnis_backpacks.HiddenHelper;
 import com.sammy.omnis_backpacks.client.models.BackpackModel;
+import com.sammy.omnis_backpacks.common.ItemInventory;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,7 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.Property;
@@ -24,16 +25,21 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static net.minecraft.item.BlockItem.setTileEntityNBT;
 
-public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem, IInventory
+public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem
 {
     public final Block backpackBlock;
     private LazyValue<Object> model;
@@ -67,18 +73,13 @@ public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem
         return "omnis_backpacks:textures/block/backpack_base.png";
     }
 
-    public String overlayTexture()
-    {
-        return null;
-    }
-
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
     {
         if (!BackpackMod.isCuriosLoaded)
         {
-            return null;
+            return new InventoryCapability(stack);
         }
         return HiddenHelper.curiosBackpackProvider(stack);
     }
@@ -93,6 +94,44 @@ public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem
         return ActionResult.resultFail(playerIn.getHeldItem(handIn));
     }
 
+    public String overlayTexture()
+    {
+        return null;
+    }
+
+    private static class InventoryCapability implements ICapabilityProvider
+    {
+        private final LazyOptional<IItemHandler> opt;
+
+        public InventoryCapability(ItemStack stack)
+        {
+            opt = LazyOptional.of(() -> new InvWrapper(getInventory(stack)));
+        }
+
+        @Nonnull
+        @Override
+        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing)
+        {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, opt);
+        }
+    }
+
+    public static Inventory getInventory(ItemStack stack)
+    {
+        AbstractBackpackItem item = (AbstractBackpackItem) stack.getItem();
+        return new ItemInventory(stack, item.inventorySize());
+    }
+
+    public void openContainer(World world, PlayerEntity player, ItemStack backpack)
+    {
+
+    }
+
+    public int inventorySize()
+    {
+        return 27;
+    }
+
     //region BlockItem copy paste
     @Override
     public ActionResultType onItemUse(ItemUseContext context)
@@ -100,6 +139,7 @@ public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem
         ActionResultType actionresulttype = this.tryPlace(new BlockItemUseContext(context));
         return !actionresulttype.isSuccessOrConsume() && this.isFood() ? this.onItemRightClick(context.getWorld(), context.getPlayer(), context.getHand()).getType() : actionresulttype;
     }
+
     public ActionResultType tryPlace(BlockItemUseContext context)
     {
         if (!context.canPlace())
@@ -227,62 +267,4 @@ public class AbstractBackpackItem extends ArmorItem implements IDyeableArmorItem
         return blockstate != null && this.canPlace(context, blockstate) ? blockstate : null;
     }
     //endregion
-
-    public void openContainer(World world, PlayerEntity player, ItemStack backpack)
-    {
-    }
-
-    @Override
-    public int getSizeInventory()
-    {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty()
-    {
-        return false;
-    }
-
-    @Override
-    public ItemStack getStackInSlot(int index)
-    {
-        return null;
-    }
-
-    @Override
-    public ItemStack decrStackSize(int index, int count)
-    {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeStackFromSlot(int index)
-    {
-        return null;
-    }
-
-    @Override
-    public void setInventorySlotContents(int index, ItemStack stack)
-    {
-
-    }
-
-    @Override
-    public void markDirty()
-    {
-
-    }
-
-    @Override
-    public boolean isUsableByPlayer(PlayerEntity player)
-    {
-        return false;
-    }
-
-    @Override
-    public void clear()
-    {
-
-    }
 }

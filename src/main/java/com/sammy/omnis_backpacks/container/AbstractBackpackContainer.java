@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.container.ShulkerBoxContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -22,7 +23,7 @@ public abstract class AbstractBackpackContainer extends Container
 
     public AbstractBackpackContainer(ContainerType<? extends AbstractBackpackContainer> containerType, int windowId, PlayerInventory playerInv, ItemStack backpack)
     {
-        this(containerType, windowId, playerInv, (AbstractBackpackItem)backpack.getItem(), backpack);
+        this(containerType, windowId, playerInv, AbstractBackpackItem.getInventory(backpack), backpack);
     }
     public AbstractBackpackContainer(ContainerType<? extends AbstractBackpackContainer> containerType, int windowId, PlayerInventory playerInv, IInventory inventory, ItemStack backpack)
     {
@@ -30,6 +31,7 @@ public abstract class AbstractBackpackContainer extends Container
         AbstractBackpackItem backpackItem = (AbstractBackpackItem) backpack.getItem();
         this.inventory = inventory;
         this.color = new Color(backpackItem.getColor(backpack));
+        inventory.openInventory(playerInv.player);
         for (int i = 0; i < inventory.getSizeInventory()/9f; ++i)
         {
             for (int j = 0; j < 9; ++j)

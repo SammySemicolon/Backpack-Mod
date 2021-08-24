@@ -44,4 +44,10 @@ public class NetheriteBackpackItem extends AbstractBackpackItem
         }
         player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
     }
+
+    @Override
+    public int inventorySize()
+    {
+        return 54;
+    }
 }
